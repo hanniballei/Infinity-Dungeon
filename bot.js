@@ -1,20 +1,33 @@
 require('dotenv').config();
-const { Bot } = require("grammy");
+const { Bot, InlineKeyboard } = require("grammy");
 
 // Create a bot object
 const bot = new Bot(process.env.TOKEN); // <-- place your bot token in this string
 
+bot.command("start", (ctx) => {
+    const inlineKeyboard = new InlineKeyboard()
+                            .text("Avatar", "status")
+                            .text("Dungeon", "playgame");
+    ctx.reply("Welcome to Hunter Dungeon!", {
+        reply_markup: inlineKeyboard,
+    });
+});
+
+bot.command("hunt", (ctx) => {
+    ctx.reply("Kill!")
+});
+
+bot.callbackQuery('status', (ctx) => {
+    ctx.reply("handsome man");
+});
+
+bot.callbackQuery('playgame', (ctx) => {
+    ctx.reply("Goblin out");
+});
+
 // Register listeners to handle messages
 bot.on("message:text", (ctx) => {
-    if (ctx.message.text == "/start") {
-        ctx.reply("Welcome to Hunter Dungeon!")
-    }
-    else if (ctx.message.text == "/hunt") {
-        ctx.reply("Kill!")
-    }
-    else {
-        ctx.reply("Echo: " + ctx.message.text)
-    }
+     ctx.reply("Echo: " + ctx.message.text)
 });
 
 // Start the bot (using long polling)
