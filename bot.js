@@ -13,8 +13,10 @@ bot.command("start", (ctx) => {
     });
 });
 
-bot.command("hunt", (ctx) => {
+bot.command("hunt", async (ctx) => {
     ctx.reply("Kill!")
+    let result = await ctx.api.sendDice(ctx.chat.id);
+    console.log("result:", result.dice.value);
 });
 
 bot.callbackQuery('status', (ctx) => {
