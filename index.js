@@ -19,6 +19,10 @@ bot.on('message', msg => {
     // console.log(msg.text);
     // 如果用户有发文本，则将文本再发回给用户，做一个复读机
     if(msg.text) {
+        if (msg.text == "/hunt") {
+            // sendMessage方法第一个参数为用户id，第二个参数为要发的内容
+            bot.sendMessage(msg.from.id, "Kill!");
+        }
         // sendMessage方法第一个参数为用户id，第二个参数为要发的内容
         bot.sendMessage(msg.from.id, msg.text);
     }
