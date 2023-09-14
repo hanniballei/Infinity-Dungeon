@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { Bot, session, InlineKeyboard, Keyboard } = require("grammy");
 const { I18n } = require("@grammyjs/i18n");
+const { hears } = require("@grammyjs/i18n");
 // const { emojiParser } = require("@grammyjs/emoji");
 
 // Create a bot object
@@ -30,55 +31,130 @@ bot.use(i18n);
 
 bot.command("start", async (ctx) => {
     const keyboardAtStart = new Keyboard() 
-                                .text("❓ Help")
-                                .text("🌍 Language")
+                                .text(ctx.t("Help_atStart_button"))
+                                .text(ctx.t("Language_atStart_button"))
                                 .row()
-                                .text("🥷 Hero")
-                                .text("🎒 Bag")
+                                .text(ctx.t("Hero_atStart_button"))
+                                .text(ctx.t("Bag_atStart_button"))
                                 .row()
-                                .text("🛒 Shop")
-                                .text("👹 Battle")
+                                .text(ctx.t("Shop_atStart_button"))
+                                .text(ctx.t("Battle_atStart_button"))
                                 .row()
-                                .text("🗒️ Rank")
-                                .text("⚙️ Settings")
+                                .text(ctx.t("Rank_atStart_button"))
+                                .text(ctx.t("Settings_atStart_button"))
                                 .resized();
-    // let inlineKeyboard = new InlineKeyboard()
-    //                         .text("Avatar", "status")
-    //                         .text("Dungeon", "playgame");
-    await ctx.reply(ctx.t("WelcometoHunterDungeon"), {
+    await ctx.reply(ctx.t("welcome"), {
         reply_markup: keyboardAtStart,
     });
 });
 
-bot.command("hunt", async (ctx) => {
-    await ctx.reply(ctx.t("Kill"));
-    let result = await ctx.api.sendDice(ctx.chat.id);
-    console.log("result:", result.dice.value);
-});
+bot.filter(hears("Help_atStart_button"), async (ctx) => {
+    const keyboardAtHelp = new Keyboard() 
+                                .text(ctx.t("Story_atHelp_button"))
+                                .text(ctx.t("Reward_atHelp_button"))
+                                .row()
+                                .text(ctx.t("Back_atHelp_button"))
+                                .resized();
 
-bot.command("language", async (ctx) => {
-    let inlineKeyboard = new InlineKeyboard()
-                            .text("English", "useEnglish")
-                            .text("中文", "useChinese");
-    await ctx.reply(ctx.t("choose language"), {
-        reply_markup: inlineKeyboard
+    await ctx.reply(ctx.t("Info_atHelp_text"), {
+      // `reply_to_message_id` 指定实际的回复哪一条信息。
+      reply_markup: keyboardAtHelp
     });
 });
 
-bot.callbackQuery('status', async (ctx) => {
-    await ctx.reply(ctx.t("handsome man"));
+bot.filter(hears("Story_atHelp_button"), async (ctx) => {
+    
+    await ctx.reply(ctx.t("Story_atHelp_text"));
 });
 
-bot.callbackQuery('playgame', async (ctx) => {
-    await ctx.reply(ctx.t("Goblin out"));
+bot.filter(hears("Reward_atHelp_button"), async (ctx) => {
+    
+    await ctx.reply(ctx.t("Reward_atHelp_text"));
 });
 
-bot.callbackQuery('useEnglish', async (ctx) => {
+bot.filter(hears("Back_atHelp_button"), async (ctx) => {
+    const keyboardAtStart = new Keyboard() 
+                                .text(ctx.t("Help_atStart_button"))
+                                .text(ctx.t("Language_atStart_button"))
+                                .row()
+                                .text(ctx.t("Hero_atStart_button"))
+                                .text(ctx.t("Bag_atStart_button"))
+                                .row()
+                                .text(ctx.t("Shop_atStart_button"))
+                                .text(ctx.t("Battle_atStart_button"))
+                                .row()
+                                .text(ctx.t("Rank_atStart_button"))
+                                .text(ctx.t("Settings_atStart_button"))
+                                .resized();
+    await ctx.reply(ctx.t("welcome"), {
+        // `reply_to_message_id` 指定实际的回复哪一条信息。
+        reply_markup: keyboardAtStart
+    });
+});
+
+bot.filter(hears("Language_atStart_button"), async (ctx) => {
+    const keyboardAtLang = new Keyboard()
+                            .text(ctx.t("English_atLang_button"))
+                            .text(ctx.t("Chinese_atLang_button"))
+                            .row()
+                            .text(ctx.t("Back_atLang_button"))
+                            .resized();
+
+    await ctx.reply(ctx.t("Info_atLang_text"), {
+      // `reply_to_message_id` 指定实际的回复哪一条信息。
+      reply_markup: keyboardAtLang
+    });
+});
+
+bot.filter(hears("English_atLang_button"), async (ctx) => {
     await ctx.i18n.setLocale("en");
+
+    const keyboardAtLangSub = new Keyboard() 
+                                .text(ctx.t("Back_atLangSub_button"))
+                                .resized();
+
+    await ctx.reply(ctx.t("Info_atLangSub_text"), {
+      // `reply_to_message_id` 指定实际的回复哪一条信息。
+      reply_markup: keyboardAtLangSub
+    });
 });
 
-bot.callbackQuery('useChinese', async (ctx) => {
+bot.filter(hears("Chinese_atLang_button"), async (ctx) => {
     await ctx.i18n.setLocale("zh");
+
+    const keyboardAtLangSub = new Keyboard() 
+                                .text(ctx.t("Back_atLangSub_button"))
+                                .resized();
+
+    await ctx.reply(ctx.t("Info_atLangSub_text"), {
+      // `reply_to_message_id` 指定实际的回复哪一条信息。
+      reply_markup: keyboardAtLangSub
+    });
+});
+
+bot.filter(hears("Back_atLangSub_button"), async (ctx) => {
+    const keyboardAtStart = new Keyboard() 
+                                .text(ctx.t("Help_atStart_button"))
+                                .text(ctx.t("Language_atStart_button"))
+                                .row()
+                                .text(ctx.t("Hero_atStart_button"))
+                                .text(ctx.t("Bag_atStart_button"))
+                                .row()
+                                .text(ctx.t("Shop_atStart_button"))
+                                .text(ctx.t("Battle_atStart_button"))
+                                .row()
+                                .text(ctx.t("Rank_atStart_button"))
+                                .text(ctx.t("Settings_atStart_button"))
+                                .resized();
+    await ctx.reply(ctx.t("welcome"), {
+        // `reply_to_message_id` 指定实际的回复哪一条信息。
+        reply_markup: keyboardAtStart
+    });
+});
+
+bot.on("callback_query:data", async (ctx) => {
+    console.log("Unknown button event with payload", ctx.callbackQuery.data);
+    await ctx.answerCallbackQuery(); // 移除加载动画
 });
 
 // Register listeners to handle messages
