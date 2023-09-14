@@ -1,0 +1,2 @@
+WelcometoHunterDungeon = welcome！
+Kill = Fuck！
