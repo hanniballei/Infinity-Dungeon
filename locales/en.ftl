@@ -28,6 +28,9 @@ Reward_atHelp_button = 💰 Reward
 Reward_atHelp_text = We airdrop our Token $HDT to TOP 100 players on Rank
 
 Info_atHero_text = You can hire / view / equip / dismiss your heroes here. 
+Warn_atHero_text = You don't have a hero. Summon one!
+Create_atHero_button = 📣 Summon Hero
+Info_atHeroCreate_text = Choose you hero's profession
 
 Info_atWallet_text = Your current wallet address is: 
                      { $address }

@@ -27,7 +27,10 @@ Story_atHelp_text = 这是一个地下城与猎人的故事...
 Reward_atHelp_button = 💰 奖励机制
 Reward_atHelp_text = 我们将会给排行榜上排名 前100 的玩家发放代币 $HDT
 
-Info_atHero_text = 你可以在此招募 / 查看 / 装备 / 解雇你的英雄们
+Info_atHero_text = 你可以在此查看 / 设置 你的英雄
+Warn_atHero_text = 你还没有英雄! 立即招募一个吧!
+Create_atHero_button = 📣 招募英雄
+Info_atHeroCreate_text = 选择英雄职业
 
 Info_atWallet_text = 你当前的钱包地址: 
                      { $address }
