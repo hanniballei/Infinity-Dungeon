@@ -2,8 +2,12 @@ require('dotenv').config();
 const { Bot, session, InlineKeyboard, Keyboard } = require("grammy");
 const { I18n } = require("@grammyjs/i18n");
 const { hears } = require("@grammyjs/i18n");
-import { Knight } from './heroes/knight';
-// const { emojiParser } = require("@grammyjs/emoji");
+
+const axios = require("axios");
+axios.defaults.baseURL = 'http://127.0.0.1:3030';
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+// const connectToServerInstance = axios.create();
+// import { Knight } from './heroes/knight.js';
 
 // Create a bot object
 const bot = new Bot(process.env.TOKEN); // <-- place your bot token in this string
@@ -55,6 +59,9 @@ bot.command("start", async (ctx) => {
     await ctx.reply(ctx.t("welcome"), {
         reply_markup: keyboardAtStart,
     });
+    console.log("before put data into mysql");
+    await axios.post('/api/user', { _username: "@123", _time: "2023-01-01" });
+    console.log("successfully put data into mysql");
 });
 
 
@@ -247,12 +254,18 @@ bot.command("hero", async (ctx) => {
 // ++++++++++++++++ Create ++++++++++++++++++++++++
 bot.filter(hears("Create_atHero_button"), async (ctx) => {
     const keyboardAtHeroCreate = new Keyboard() 
+                                .text(ctx.t("Knight_atHeroCreate_button"))
+                                .text(ctx.t("Elf_atHeroCreate_button"))
+                                .row()
+                                .text(ctx.t("Wizard_atHeroCreate_button"))
+                                .text(ctx.t("Alchemist_atHeroCreate_button"))
+                                .row()
                                 .text(ctx.t("Back_Home_button"))
                                 .resized();
 
     await ctx.reply(ctx.t("Info_atHeroCreate_text"), {
       // `reply_to_message_id` 指定实际的回复哪一条信息。
-      reply_markup: keyboardAtLangSub
+      reply_markup: keyboardAtHeroCreate
     });
 });
 
@@ -283,6 +296,23 @@ bot.command("bag", async (ctx) => {
     await ctx.reply(ctx.t("Info_atHero_text"), {
       // `reply_to_message_id` 指定实际的回复哪一条信息。
       reply_markup: keyboardAtBag
+    });
+});
+
+
+
+// -------------- /battle ----------------------------------------
+// -------------------------------------------------------------
+bot.filter(hears("Battle_atStart_button"), async (ctx) => {
+    const keyboardAtBattle = new Keyboard() 
+                                .text(ctx.t("Explore_atBattle_button"))
+                                .row()
+                                .text(ctx.t("Back_Home_button"))
+                                .resized();
+
+    await ctx.reply(ctx.t("Info_atBattle_text", {level: Level, step: Step}), {
+      // `reply_to_message_id` 指定实际的回复哪一条信息。
+      reply_markup: keyboardAtBattle
     });
 });
 

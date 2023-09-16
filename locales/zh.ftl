@@ -27,10 +27,21 @@ Story_atHelp_text = 这是一个地下城与猎人的故事...
 Reward_atHelp_button = 💰 奖励机制
 Reward_atHelp_text = 我们将会给排行榜上排名 前100 的玩家发放代币 $HDT
 
-Info_atHero_text = 你可以在此查看 / 设置 你的英雄
+Info_atHero_text = { $prof } - @ { $name }
+
+                   生命值 : { $health }
+                   攻击力 : { $atk }
+                   防御力 : { $def }
+                   速度   : { $spd }
 Warn_atHero_text = 你还没有英雄! 立即招募一个吧!
 Create_atHero_button = 📣 招募英雄
 Info_atHeroCreate_text = 选择英雄职业
+Knight_atHeroCreate_button = 🐎 骑士
+Elf_atHeroCreate_button = 🧚‍♀️ 精灵
+Wizard_atHeroCreate_button = 🧙‍♂️ 法师
+Alchemist_atHeroCreate_button = 🧪 术士
+
+Info_atBattle_text = 你当前在 关卡 - { $level }, 回合 - { $step }
 
 Info_atWallet_text = 你当前的钱包地址: 
                      { $address }

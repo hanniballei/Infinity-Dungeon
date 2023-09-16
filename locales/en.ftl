@@ -27,10 +27,21 @@ Story_atHelp_text = A dungeon story...
 Reward_atHelp_button = 💰 Reward
 Reward_atHelp_text = We airdrop our Token $HDT to TOP 100 players on Rank
 
-Info_atHero_text = You can hire / view / equip / dismiss your heroes here. 
+Info_atHero_text = { $prof } - @ { $name }
+
+                   Health : { $health }
+                   Attack : { $atk }
+                   Defense: { $def }
+                   Speed  : { $spd }
 Warn_atHero_text = You don't have a hero. Summon one!
 Create_atHero_button = 📣 Summon Hero
 Info_atHeroCreate_text = Choose you hero's profession
+Knight_atHeroCreate_button = 🐎 Knight
+Elf_atHeroCreate_button = 🧚‍♀️ Elf
+Wizard_atHeroCreate_button = 🧙‍♂️ Wizard
+Alchemist_atHeroCreate_button = 🧪 Alchemist
+
+Info_atBattle_text = You are now at Level - { $level }, Step - { $step }
 
 Info_atWallet_text = Your current wallet address is: 
                      { $address }
