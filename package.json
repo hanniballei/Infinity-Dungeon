@@ -1,21 +1,25 @@
 {
-  "name": "telebot",
+  "name": "telegram_bot",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "weather-assistant",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
-    "@grammyjs/emoji": "^1.1.0",
-    "@grammyjs/i18n": "^1.0.1",
-    "@tonconnect/sdk": "^3.0.0-beta.1",
-    "axios": "^1.5.0",
     "dotenv": "^16.3.1",
     "grammy": "^1.18.1",
-    "node-telegram-bot-api": "^0.63.0",
-    "socks5-https-client": "^1.2.1"
+    "http": "^0.0.1-security",
+    "http-proxy-agent": "^7.0.0",
+    "https": "^1.0.0",
+    "https-proxy-agent": "^7.0.2",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node-telegram-bot-api": "^0.61.7"
   }
 }
