@@ -59,9 +59,9 @@ bot.command("start", async (ctx) => {
     await ctx.reply(ctx.t("welcome"), {
         reply_markup: keyboardAtStart,
     });
-    console.log("before put data into mysql");
-    await axios.post('/api/user', { _username: "@123", _time: "2023-01-01" });
-    console.log("successfully put data into mysql");
+    // console.log("before put data into mysql");
+    // await axios.post('/api/user', { _username: "@123", _time: "2023-01-01" });
+    // console.log("successfully put data into mysql");
 });
 
 
@@ -429,6 +429,7 @@ bot.on("callback_query:data", async (ctx) => {
 // Register listeners to handle messages
 bot.on("message:text", async (ctx) => {
     await ctx.reply("Echo: " + ctx.t(ctx.message.text))
+    console.log("message:", ctx.message);
 });
 
 // Start the bot (using long polling)
