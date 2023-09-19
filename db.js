@@ -28,8 +28,9 @@ export const users = `
 
 export const players = `
   CREATE TABLE IF NOT EXISTS players (
-    telegram_id BIGINT NOT NULL,
-    player_name VARCHAR(32),
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    tg_id VARCHAR(16) NOT NULL,
+    name VARCHAR(32),
     role VARCHAR(32),
     level INT,
     exp INT,
@@ -59,7 +60,6 @@ export const players = `
     equipped_armor INT,
     status INT,
     
-    PRIMARY KEY (telegram_id),
     INDEX idx_ranking (ranking)
   );
 `;

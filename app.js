@@ -39,7 +39,9 @@ bot.use(
 bot.use(i18n);
 
 var user_id = "";
-
+var player_id = -1;
+// Store wallet addr [temp]
+var walletAddr = "NULL";
 
 // -------------- /start ----------------------------------------
 // --------------------------------------------------------------
@@ -63,9 +65,15 @@ bot.command('start', async (ctx) => {
         reply_markup: keyboardAtStart,
     });
 
+    // 如果用户第一次交互，在数据库中记录下用户数据
     let user = await getData("SELECT * FROM users WHERE tg_id = ?", user_id);
     if (user == null) {
       let res = await getData("INSERT INTO users (tg_id, wallet_connected, wallet_addr) VALUES (?, false, \"NULL\")", user_id);
+    }
+    // 查看用户是否已创建游戏角色
+    player_id = await getData("SELECT id FROM players WHERE tg_id = ?", user_id);
+    if (player_id == null) {
+      player_id = -1;
     }
     // let is_connect_wallet = user.wallet_connected;
 
@@ -121,7 +129,132 @@ bot.command("home", async (ctx) => {
   });
 });
 
-// 需要检查钱包是否连接
+
+
+// -------------- /help ----------------------------------------
+// -------------------------------------------------------------
+bot.filter(hears("Help_atStart_button"), async (ctx) => {
+  const keyboardAtHelp = new Keyboard() 
+                              .text(ctx.t("Story_atHelp_button"))
+                              .text(ctx.t("Reward_atHelp_button"))
+                              .row()
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+
+  await ctx.reply(ctx.t("Info_atHelp_text"), {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtHelp
+  });
+});
+bot.command("help", async (ctx) => {
+  const keyboardAtHelp = new Keyboard() 
+                              .text(ctx.t("Story_atHelp_button"))
+                              .text(ctx.t("Reward_atHelp_button"))
+                              .row()
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+
+  await ctx.reply(ctx.t("Info_atHelp_text"), {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtHelp
+  });
+});
+// ++++++++++++++++ Story ++++++++++++++++++++++++
+bot.filter(hears("Story_atHelp_button"), async (ctx) => {
+  
+  await ctx.reply(ctx.t("Story_atHelp_text"));
+});
+// ++++++++++++++++ Reward ++++++++++++++++++++++++
+bot.filter(hears("Reward_atHelp_button"), async (ctx) => {
+  
+  await ctx.reply(ctx.t("Reward_atHelp_text"));
+});
+
+
+
+// -------------- /language ----------------------------------------
+// -------------------------------------------------------------
+bot.filter(hears("Language_atStart_button"), async (ctx) => {
+  const keyboardAtLang = new Keyboard()
+                          .text(ctx.t("English_atLang_button"))
+                          .text(ctx.t("Chinese_atLang_button"))
+                          .row()
+                          .text(ctx.t("Back_Home_button"))
+                          .resized();
+
+  await ctx.reply(ctx.t("Info_atLang_text"), {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtLang
+  });
+});
+bot.command("language", async (ctx) => {
+  const keyboardAtLang = new Keyboard()
+                          .text(ctx.t("English_atLang_button"))
+                          .text(ctx.t("Chinese_atLang_button"))
+                          .row()
+                          .text(ctx.t("Back_Home_button"))
+                          .resized();
+
+  await ctx.reply(ctx.t("Info_atLang_text"), {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtLang
+  });
+});
+// ++++++++++++++++ English ++++++++++++++++++++++++
+bot.filter(hears("English_atLang_button"), async (ctx) => {
+  await ctx.i18n.setLocale("en");
+
+  const keyboardAtLangSub = new Keyboard() 
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+
+  await ctx.reply(ctx.t("Info_atLangSub_text"), {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtLangSub
+  });
+});
+// ++++++++++++++++ Chinese ++++++++++++++++++++++++
+bot.filter(hears("Chinese_atLang_button"), async (ctx) => {
+  await ctx.i18n.setLocale("zh");
+
+  const keyboardAtLangSub = new Keyboard() 
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+
+  await ctx.reply(ctx.t("Info_atLangSub_text"), {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtLangSub
+  });
+});
+
+
+
+// -------------- /hero ----------------------------------------
+// -------------------------------------------------------------
+bot.filter(hears("Hero_atStart_button"), async (ctx) => {
+    
+  const keyboardAtHero_0 = new Keyboard() 
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+  const keyboardAtHero_1 = new Keyboard() 
+                              .text(ctx.t("Create_atHero_button"))
+                              .row()
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+
+  if (player_id == -1) {
+      await ctx.reply(ctx.t("Warn_atHero_text"), {
+          // `reply_to_message_id` 指定实际的回复哪一条信息。
+          reply_markup: keyboardAtHero_1
+      });
+  }
+  else {
+      await ctx.reply(ctx.t("Info_atHero_text"), {
+          // `reply_to_message_id` 指定实际的回复哪一条信息。
+          reply_markup: keyboardAtHero_0
+      });
+  }
+});
 bot.command('hero', async (ctx) => {
   const inlineKeyboard = new InlineKeyboard()
     .text("骑士", "Paladin")
@@ -145,7 +278,23 @@ bot.command('hero', async (ctx) => {
     await ctx.reply("下面是你目前的角色信息.....");
   }
 });
+// ++++++++++++++++ Create ++++++++++++++++++++++++
+bot.filter(hears("Create_atHero_button"), async (ctx) => {
+  const keyboardAtHeroCreate = new Keyboard() 
+                              .text(ctx.t("Knight_atHeroCreate_button"))
+                              .text(ctx.t("Elf_atHeroCreate_button"))
+                              .row()
+                              .text(ctx.t("Wizard_atHeroCreate_button"))
+                              .text(ctx.t("Alchemist_atHeroCreate_button"))
+                              .row()
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
 
+  await ctx.reply(ctx.t("Info_atHeroCreate_text"), {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtHeroCreate
+  });
+});
 // 相应用户点击创建“骑士”角色
 // ctx.callbackQuery.data代表按键的文字
 bot.callbackQuery("Paladin", async (ctx) => {
@@ -175,6 +324,38 @@ bot.callbackQuery("Paladin", async (ctx) => {
 // 相应用户点击创建“法师”角色
 
 // 相应用户点击创建“术士”角色
+
+
+
+// -------------- /bag ----------------------------------------
+// -------------------------------------------------------------
+bot.filter(hears("Bag_atStart_button"), async (ctx) => {
+  const keyboardAtBag = new Keyboard() 
+                              .text(ctx.t("Story_atHelp_button"))
+                              .text(ctx.t("Reward_atHelp_button"))
+                              .row()
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+
+  await ctx.reply(ctx.t("Info_atHero_text"), {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtBag
+  });
+});
+bot.command("bag", async (ctx) => {
+  const keyboardAtBag = new Keyboard() 
+                              .text(ctx.t("Story_atHelp_button"))
+                              .text(ctx.t("Reward_atHelp_button"))
+                              .row()
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+
+  await ctx.reply(ctx.t("Info_atHero_text"), {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtBag
+  });
+});
+
 
 //
 bot.command("battle", async (ctx) => {
@@ -221,6 +402,121 @@ bot.callbackQuery("continue_battle", async (ctx) => {
     ctx.reply("你现在的体力值不够，可以去商店购买、等体力自然恢复或者每天中午十二点和下午六点领取体力");
   }
   */
+});
+
+
+
+// -------------- /rank ----------------------------------------
+// -------------------------------------------------------------
+bot.filter(hears("Rank_atStart_button"), async (ctx) => {
+  const keyboardAtRank = new Keyboard() 
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+  let players = [
+      {
+          name: "a",
+          point: "100"
+      },
+      {
+          name: "b",
+          point: "90"
+      },
+      {
+          name: "c",
+          point: "80"
+      }
+  ];
+  let rank_string = "";
+  
+  for(let i = 0; i < players.length; i++) {
+      rank_string += ctx.t("Info_atRank_text", { rank: i, name: players[i].name, point: players[i].point});
+      rank_string += "\n";
+  }
+
+  await ctx.reply(rank_string, {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtRank
+  });
+});
+bot.command("rank", async (ctx) => {
+  const keyboardAtRank = new Keyboard() 
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+  let players = [
+      {
+          name: "a",
+          point: "100"
+      },
+      {
+          name: "b",
+          point: "90"
+      },
+      {
+          name: "c",
+          point: "80"
+      }
+  ];
+  let rank_string = "";
+  
+  for(let i = 0; i < players.length; i++) {
+      rank_string += ctx.t("Info_atRank_text", { rank: i, name: players[i].name, point: players[i].point});
+      rank_string += "\n";
+  }
+
+  await ctx.reply(rank_string, {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtRank
+  });
+});
+
+
+
+// -------------- /wallet ----------------------------------------
+// -------------------------------------------------------------
+bot.filter(hears("Wallet_atStart_button"), async (ctx) => {
+  const keyboardAtWallet = new Keyboard() 
+                              .webApp(ctx.t("Connect_atWallet_button"), "https://jasonplato.github.io/my-twa/")
+                              .row()
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+
+  await ctx.reply(ctx.t("Info_atWallet_text", { address: walletAddr}), {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtWallet
+  });
+});
+bot.command("wallet", async (ctx) => {
+  const keyboardAtWallet = new Keyboard() 
+                              .webApp(ctx.t("Connect_atWallet_button"), "https://jasonplato.github.io/my-twa/")
+                              .row()
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+
+  await ctx.reply(ctx.t("Info_atWallet_text", { address: walletAddr}), {
+    // `reply_to_message_id` 指定实际的回复哪一条信息。
+    reply_markup: keyboardAtWallet
+  });
+});
+
+
+
+// -------------- Message Receive ----------------------------------------
+// -----------------------------------------------------------------------
+bot.on("message:web_app_data", async (ctx) => {
+  walletAddr = ctx.message.web_app_data.data;
+  console.log("wallet:", walletAddr);
+  await ctx.reply(ctx.t("Info_atWallet_text", {address: walletAddr}))
+});
+
+bot.on("callback_query:data", async (ctx) => {
+  console.log("Unknown button event with payload", ctx.callbackQuery.data);
+  await ctx.answerCallbackQuery(); // 移除加载动画
+});
+
+// Register listeners to handle messages
+bot.on("message:text", async (ctx) => {
+  await ctx.reply("Echo: " + ctx.t(ctx.message.text))
+  console.log("message:", ctx.message);
 });
 
 // 通过sql语句返回查询的信息
