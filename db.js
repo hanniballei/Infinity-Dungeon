@@ -1,12 +1,13 @@
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const mysql = require('mysql');
+require('dotenv').config();
 const connection = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: 'Lei19970709',
-    database: 'telegram-bot'
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PW,
+    database: process.env.DB_DATABASE
 });
 
 // 导出数据库连接
@@ -14,21 +15,22 @@ export { connection };
 
 export const users = `
   CREATE TABLE IF NOT EXISTS users (
-    telegram_id VARCHAR(16) NOT NULL,
-    telegram_name VARCHAR(32) NOT NULL,
+    tg_id VARCHAR(16) NOT NULL,
+    tg_name VARCHAR(32),
     wallet_connected BOOLEAN,
     wallet_addr VARCHAR(64),
-    first_time DATE NOT NULL,
-    is_created BOOLEAN, 
+    createAt DATE,
+    updatedAt DATE,
     
-    PRIMARY KEY (telegram_id)
+    PRIMARY KEY (tg_id)
   );
 `;
 
 export const players = `
   CREATE TABLE IF NOT EXISTS players (
-    telegram_id BIGINT NOT NULL,
-    player_name VARCHAR(32) NOT NULL,
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    tg_id VARCHAR(16) NOT NULL,
+    name VARCHAR(32),
     role VARCHAR(32),
     level INT,
     exp INT,
@@ -58,7 +60,6 @@ export const players = `
     equipped_armor INT,
     status INT,
     
-    PRIMARY KEY (telegram_id),
     INDEX idx_ranking (ranking)
   );
 `;
