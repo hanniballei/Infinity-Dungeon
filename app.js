@@ -2,11 +2,15 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 import { HttpsProxyAgent } from 'https-proxy-agent';
 require('dotenv').config();
-const {Bot, InlineKeyboard, Keyboard, Text} = require("grammy");
+const {Bot, session, InlineKeyboard, Keyboard, Text} = require("grammy");
+const { I18n } = require("@grammyjs/i18n");
+const { hears } = require("@grammyjs/i18n");
+// 导入数据库
+import { connection, users, players, roles, monsters } from './db.js';
 
 const token = process.env.TOKEN;
 const http_proxy = process.env.PROXY;
-const agent = new HttpsProxyAgent("http://192.168.10.4:4780");
+const agent = new HttpsProxyAgent(http_proxy);
 
 const bot = new Bot(token, {
     client: {
@@ -16,24 +20,105 @@ const bot = new Bot(token, {
     },
   });
 
-// 导入数据库
-import { connection, users, players, roles, monsters } from './db.js';
+// i18n 用于做国际化 internationalization
+const i18n = new I18n({
+  defaultLocale: "en",
+  useSession: true, // 是否在会话中存储用户的语言
+  directory: "./locales", // 从 locales/ 加载所有翻译文件
+});
 
-// 'start'的功能最后需要合并
+bot.use(
+  session({
+    initial: () => {
+      return {};
+    },
+  }),
+);
+
+// 注册 i18n 中间件
+bot.use(i18n);
+
+var user_id = "";
+
+
+// -------------- /start ----------------------------------------
+// --------------------------------------------------------------
 bot.command('start', async (ctx) => {
-  const user_id = ctx.msg.chat.id;
   try {
-    let user = await getData("SELECT * FROM users WHERE telegram_id = ?", user_id);
-    let is_connect_wallet = user.is_connect_wallet;
+    user_id = ctx.msg.chat.id;
+    const keyboardAtStart = new Keyboard() 
+                                .text(ctx.t("Help_atStart_button"))
+                                .text(ctx.t("Language_atStart_button"))
+                                .row()
+                                .text(ctx.t("Hero_atStart_button"))
+                                .text(ctx.t("Bag_atStart_button"))
+                                .row()
+                                .text(ctx.t("Shop_atStart_button"))
+                                .text(ctx.t("Battle_atStart_button"))
+                                .row()
+                                .text(ctx.t("Rank_atStart_button"))
+                                .text(ctx.t("Wallet_atStart_button"))
+                                .resized();
+    await ctx.reply(ctx.t("welcome"), {
+        reply_markup: keyboardAtStart,
+    });
 
-    if (!is_connect_wallet) {
-      ctx.reply("This is a Text-based RPG Game\nYou need to connect wallet first.");
-    } else {
-      ctx.reply("This is a Text-based RPG Game\nHere is some useful commands");
+    let user = await getData("SELECT * FROM users WHERE tg_id = ?", user_id);
+    if (user == null) {
+      let res = await getData("INSERT INTO users (tg_id, wallet_connected, wallet_addr) VALUES (?, false, \"NULL\")", user_id);
     }
+    // let is_connect_wallet = user.wallet_connected;
+
+    // if (!is_connect_wallet) {
+    //   ctx.reply("This is a Text-based RPG Game\nYou need to connect wallet first.");
+    // } else {
+    //   ctx.reply("This is a Text-based RPG Game\nHere is some useful commands");
+    // }
   } catch {
     console.error(err);
   }
+});
+
+
+// -------------- /home ----------------------------------------
+// --------------------------------------------------------------
+bot.filter(hears("Back_Home_button"), async (ctx) => {
+  const keyboardAtStart = new Keyboard() 
+                              .text(ctx.t("Help_atStart_button"))
+                              .text(ctx.t("Language_atStart_button"))
+                              .row()
+                              .text(ctx.t("Hero_atStart_button"))
+                              .text(ctx.t("Bag_atStart_button"))
+                              .row()
+                              .text(ctx.t("Shop_atStart_button"))
+                              .text(ctx.t("Battle_atStart_button"))
+                              .row()
+                              .text(ctx.t("Rank_atStart_button"))
+                              .text(ctx.t("Wallet_atStart_button"))
+                              .resized();
+  await ctx.reply(ctx.t("welcome"), {
+      // `reply_to_message_id` 指定实际的回复哪一条信息。
+      reply_markup: keyboardAtStart
+  });
+});
+bot.command("home", async (ctx) => {
+  const keyboardAtStart = new Keyboard() 
+                              .text(ctx.t("Help_atStart_button"))
+                              .text(ctx.t("Language_atStart_button"))
+                              .row()
+                              .text(ctx.t("Hero_atStart_button"))
+                              .text(ctx.t("Bag_atStart_button"))
+                              .row()
+                              .text(ctx.t("Shop_atStart_button"))
+                              .text(ctx.t("Battle_atStart_button"))
+                              .row()
+                              .text(ctx.t("Rank_atStart_button"))
+                              .text(ctx.t("Wallet_atStart_button"))
+                              .resized();
+  await ctx.reply(ctx.t("welcome"), {
+      // `reply_to_message_id` 指定实际的回复哪一条信息。
+      reply_markup: keyboardAtStart
+  });
 });
 
 // 需要检查钱包是否连接
