@@ -5,7 +5,6 @@ require('dotenv').config();
 const {Bot, InlineKeyboard, Keyboard, Text} = require("grammy");
 
 const token = process.env.TOKEN;
-const http_proxy = process.env.PROXY;
 const agent = new HttpsProxyAgent("http://192.168.10.4:4780");
 
 const bot = new Bot(token, {
@@ -21,8 +20,11 @@ import { connection, users, players, roles, monsters } from './db.js';
 
 // 'start'的功能最后需要合并
 bot.command('start', async (ctx) => {
-  const user_id = ctx.msg.chat.id;
+  console.log(ctx.msg);
+  ctx.reply("This is a Text-based RPG Game\nHere is some useful commands");
+  /*
   try {
+    const user_id = (ctx.msg.chat.id).toString();
     let user = await getData("SELECT * FROM users WHERE telegram_id = ?", user_id);
     let is_connect_wallet = user.is_connect_wallet;
 
@@ -34,9 +36,9 @@ bot.command('start', async (ctx) => {
   } catch {
     console.error(err);
   }
+  */
 });
 
-// 需要检查钱包是否连接
 bot.command('hero', async (ctx) => {
   const inlineKeyboard = new InlineKeyboard()
     .text("骑士", "Paladin")
@@ -45,7 +47,7 @@ bot.command('hero', async (ctx) => {
     .text("法师", "Mage")
     .text("术士", "Cleric");
 
-  // 每个用户在连接钱包以后就会在player这个表单中创建一行数据
+  // 每个用户在第一次输入/start以后就会在users和players表单中创建一行数据
   // let hero = db.players.findOne({id: ctx.from.id});  
   // let if_existplayer = hero.new_player;
   let if_existplayer = false; 

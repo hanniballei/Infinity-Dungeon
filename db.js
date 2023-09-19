@@ -14,9 +14,11 @@ export { connection };
 
 export const users = `
   CREATE TABLE IF NOT EXISTS users (
-    telegram_id BIGINT NOT NULL,
-    telegram_name VARCHAR(32),
-    is_connect_wallet BOOLEAN,
+    telegram_id VARCHAR(16) NOT NULL,
+    telegram_name VARCHAR(32) NOT NULL,
+    wallet_connected BOOLEAN,
+    wallet_addr VARCHAR(64),
+    first_time DATE NOT NULL,
     is_created BOOLEAN, 
     
     PRIMARY KEY (telegram_id)
@@ -26,7 +28,7 @@ export const users = `
 export const players = `
   CREATE TABLE IF NOT EXISTS players (
     telegram_id BIGINT NOT NULL,
-    player_name VARCHAR(32),
+    player_name VARCHAR(32) NOT NULL,
     role VARCHAR(32),
     level INT,
     exp INT,
