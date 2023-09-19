@@ -85,7 +85,9 @@ bot.command('start', async (ctx) => {
   } catch {
     console.error(err);
   }
+  */
 });
+
 
 
 // -------------- /home ----------------------------------------
@@ -263,7 +265,7 @@ bot.command('hero', async (ctx) => {
     .text("法师", "Mage")
     .text("术士", "Cleric");
 
-  // 每个用户在连接钱包以后就会在player这个表单中创建一行数据
+  // 每个用户在第一次输入/start以后就会在users和players表单中创建一行数据
   // let hero = db.players.findOne({id: ctx.from.id});  
   // let if_existplayer = hero.new_player;
   let if_existplayer = false; 
