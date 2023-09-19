@@ -19,8 +19,7 @@ export const users = `
     tg_name VARCHAR(32),
     wallet_connected BOOLEAN,
     wallet_addr VARCHAR(64),
-    createAt DATE,
-    updatedAt DATE,
+    created_at TIMESTAMP
     
     PRIMARY KEY (tg_id)
   );

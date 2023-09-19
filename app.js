@@ -85,7 +85,7 @@ bot.command('start', async (ctx) => {
   } catch {
     console.error(err);
   }
-  */
+  
 });
 
 
