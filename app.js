@@ -265,11 +265,13 @@ bot.command('hero', async (ctx) => {
     .text("法师", "Mage")
     .text("术士", "Cleric");
 
+  const user_id = (ctx.msg.chat.id).toString();
+
   // 每个用户在第一次输入/start以后就会在users和players表单中创建一行数据
   // let hero = db.players.findOne({id: ctx.from.id});  
   // let if_existplayer = hero.new_player;
   let if_existplayer = false; 
-
+  let user = await getData("SELECT * FROM users WHERE telegram_id = ?", user_id);
   // 如果没有创建新角色，则选择一个职业进行创建
   if (!if_existplayer) {
     await ctx.reply("您还未创建角色，下面有四个角色供您选择。这四个职业的特点是......请选择你要创建的职业：", {
@@ -387,10 +389,6 @@ bot.command("battle", async (ctx) => {
       reply_markup: inlineKeyboard,
     });
   }
-});
-
-bot.callbackQuery("flee", async (ctx) => {
-
 });
 
 bot.callbackQuery("continue_battle", async (ctx) => {

@@ -48,3 +48,10 @@ Info_atWallet_text = Your current wallet address is:
 Connect_atWallet_button = 🔗 Connect Wallet
 
 Info_atRank_text = { $rank } : { $name } - { $point };
+
+Surrender_atBattleStart_button = 🤥Surrender
+ContinueFight_atBattleStart_button = ⚔️Continue Fight
+Hero_atBattleStart_button = 🥷 Hero
+Bag_atBattleStart_button = 🎒 Bag
+SendDice_atBattleStart_PlayerFirst_button = 🎲Rolling for Attack
+SendDice_atBattleStart_MonsterFirst_button = 🎲Rolling for Defense

@@ -48,3 +48,10 @@ Info_atWallet_text = 你当前的钱包地址:
 Connect_atWallet_button = 🔗 连接钱包
 
 Info_atRank_text = { $rank } : { $name } - { $point };
+
+Surrender_atBattleStart_button = 🤥投降
+ContinueFight_atBattleStart_button = ⚔️继续战斗
+Hero_atBattleStart_button = 🥷 英雄
+Bag_atBattleStart_button = 🎒 背包
+SendDice_atBattleStart_PlayerFirst_button = 🎲进行攻击判定
+SendDice_atBattleStart_MonsterFirst_button = 🎲进行防御判定

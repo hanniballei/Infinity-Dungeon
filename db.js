@@ -19,7 +19,8 @@ export const users = `
     tg_name VARCHAR(32),
     wallet_connected BOOLEAN,
     wallet_addr VARCHAR(64),
-    created_at TIMESTAMP
+    first_time TIMESTAMP NOT NULL,
+    is_created BOOLEAN, 
     
     PRIMARY KEY (tg_id)
   );
@@ -29,14 +30,14 @@ export const players = `
   CREATE TABLE IF NOT EXISTS players (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     tg_id VARCHAR(16) NOT NULL,
-    name VARCHAR(32),
-    role VARCHAR(32),
-    level INT,
-    exp INT,
-    gold BIGINT,  
+    name VARCHAR(32) NOT NULL,
+    gold BIGINT NOT NULL,  
     ranking INT,
-    cur_action_point INT,
-    max_action_point INT,
+    ranking_points BIGINT NOT NULL,
+    monster_counts INT NOT NULL,
+    events_counts INT NOT NULL,
+    cur_action_points INT,
+    max_action_points INT,
     cur_hp INT,
     max_hp INT,
     cur_attack INT,
@@ -63,19 +64,6 @@ export const players = `
   );
 `;
 
-export const roles = `
-  CREATE TABLE IF NOT EXISTS roles (
-    role_id INT NOT NULL,
-    role_name VARCHAR(32),
-    base_hp INT,
-    base_attack INT,
-    base_defense INT,
-    base_agility INT, 
-    base_luck INT, 
-    
-    PRIMARY KEY (role_id)
-  );
-`;
 
 export const monsters = `
   CREATE TABLE IF NOT EXISTS monsters (
@@ -113,12 +101,6 @@ connection.connect(function(err) {
 connection.query(players, (err, result) => {
   if (err) throw err;
   console.log('Player table created!');
-});
-
-// 创建 roles 表  
-connection.query(roles, (err, result) => {
-  if (err) throw err;
-  console.log("Roles table created");
 });
 
 // 创建 monsters 表
