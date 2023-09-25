@@ -257,6 +257,7 @@ bot.filter(hears("Hero_atStart_button"), async (ctx) => {
       });
   }
 });
+
 bot.command('hero', async (ctx) => {
   const inlineKeyboard = new InlineKeyboard()
     .text("骑士", "Paladin")

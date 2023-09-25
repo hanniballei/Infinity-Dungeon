@@ -45,8 +45,6 @@ export const players = `
     cur_defense INT,
     max_defense INT,
     cur_agility INT,
-    max_agility INT,
-    luck INT,  
     fire_atk INT,
     ice_atk INT,
     poison_atk INT,
@@ -55,12 +53,11 @@ export const players = `
     ice_resist INT,
     poison_resist INT,
     thunder_resist INT,
-    revival_coin_count INT,
+    health_potion_count INT NOT NULL,
+    action_potion_count INT NOT NULL,
     equipped_weapon INT,
     equipped_armor INT,
-    status INT,
-    
-    INDEX idx_ranking (ranking)
+    status INT
   );
 `;
 
