@@ -6,7 +6,7 @@ const {Bot, session, InlineKeyboard, Keyboard, Text} = require("grammy");
 const { I18n } = require("@grammyjs/i18n");
 const { hears } = require("@grammyjs/i18n");
 // 导入数据库
-import { connection, users, players, monsters } from './db.js';
+import { dbpool, users, players, monsters } from './db.js';
 
 const token = process.env.TOKEN;
 const http_proxy = process.env.PROXY;
@@ -702,21 +702,30 @@ bot.filter(hears("ContinueFight_atBattleStart_button"),async (ctx) => {
 // 使用Promise来处理异步操作
 function getData(sqlaction, params) {
   return new Promise((resolve, reject) => {
-    connection.query(sqlaction, params, (err, results) => {
-      if (err) {
-        console.error("Error executing query: ", err.message);
-        reject(err);
-      } else {
-        if (results.length > 0) {
-          let result_data = results[0];
-          // console.log("Get Database Data: ", result_data);
-          resolve(result_data); // 解析查询结果并将其返回
-        } else {
-          console.log("Not Found This Data");
-          resolve(null); // 返回空值
-        }
+    dbpool.getConnection((err, connection) => {
+      if (err)
+        console.log("connection failed");
+      else {
+        dbpool.query(sqlaction, params, (err, results) => {
+          if (err) {
+            console.error("Error executing query: ", err.message);
+            reject(err);
+          } else {
+            if (results.length > 0) {
+              let result_data = results[0];
+              // console.log("Get Database Data: ", result_data);
+              resolve(result_data); // 解析查询结果并将其返回
+            } else {
+              console.log("Not Found This Data");
+              resolve(null); // 返回空值
+            }
+          }
+
+          connection.release();
+        });
       }
-    });
+    })
+    
   });
 }
 

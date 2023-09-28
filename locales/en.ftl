@@ -13,8 +13,6 @@ welcome_if_created = Welcome { $username } back to Hunter Dungeon！This is a RP
 
                          If you have any question, please click '❓ Help' button to get some useful information.
 
-Kill = Fuck！
-
 Back_Home_button = ⬅️🏠 Back to Homepage
 
 Back_atHelp_button = ⬅️ Back
@@ -216,5 +214,5 @@ Defense_atBattle2_text = 🛡️ Monster gives { $dmg } damage for you.
                          💚 Now it has { $monster_cur_hp } hp.
 
                          🛡️ The following turn is your attack turn, lease click "🎲Rolling for Attack" button to determine your damage bonus against the monster.
-keyboardWaiting = 🕓Waiting
+Waiting_For_Turn_End_button = 🕓Waiting
 Waiting_atBattle_text = 🕓 Waiting for the dice rolling and turn end.
