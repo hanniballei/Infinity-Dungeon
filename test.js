@@ -6,7 +6,8 @@ const {Bot, session, InlineKeyboard, Keyboard, Text} = require("grammy");
 const { I18n } = require("@grammyjs/i18n");
 const { hears } = require("@grammyjs/i18n");
 // 导入数据库
-import { dbpool, users, players, monsters } from './db.js';
+// import { dbpool, users, players, monsters } from './db.js';
+import { connection, users, players, monsters } from './db.js';
 
 const token = process.env.TOKEN;
 const http_proxy = process.env.PROXY;
@@ -87,7 +88,7 @@ bot.command('start', async (ctx) => {
 
 
 
-// -------------- /home ----------------------------------------
+// -------------- Back Home ----------------------------------------
 // --------------------------------------------------------------
 bot.filter(hears("Back_Home_button"), async (ctx) => {
   const keyboardAtStart = new Keyboard() 
@@ -110,7 +111,7 @@ bot.filter(hears("Back_Home_button"), async (ctx) => {
 
 
 
-// -------------- /Help ----------------------------------------
+// -------------- Help ----------------------------------------
 // --------------------------------------------------------------
 bot.filter(hears("Help_atStart_button"), async (ctx) => {
   const keyboardAtHelp = new Keyboard() 
@@ -145,7 +146,7 @@ bot.filter(hears("Reward_atHelp_button"), async (ctx) => {
 
 
 
-// -------------- /language ----------------------------------------
+// -------------- Language ----------------------------------------
 // -------------------------------------------------------------
 // (补完)到时候可以加入俄语和西语
 bot.filter(hears("Language_atStart_button"), async (ctx) => {
@@ -190,7 +191,7 @@ bot.filter(hears("Chinese_atLang_button"), async (ctx) => {
 
 
 
-// -------------- /Hero ----------------------------------------
+// -------------- Hero ----------------------------------------
 // --------------------------------------------------------------
 bot.filter(hears("Hero_atStart_button"),async (ctx) => {
   const keyboardAtHero_0 = new Keyboard() 
@@ -211,9 +212,10 @@ bot.filter(hears("Hero_atStart_button"),async (ctx) => {
       reply_markup: keyboardAtHero_1,
     });
   } else {
-    // (补完)
     await ctx.reply(ctx.t("Info_atHero_text", {
       username: player.name,
+      gold: player.gold,
+      action_points: player.cur_action_points,
       health : player.cur_hp,
       atk : player.cur_attack,
       def : player.cur_defense,
@@ -261,7 +263,7 @@ bot.filter(hears("Create_atHero_button"),async (ctx) => {
 
 
 
-// -------------- /bag ----------------------------------------
+// -------------- Bag ----------------------------------------
 // --------------------------------------------------------------
 bot.filter(hears("Bag_atStart_button"), async (ctx) => {
   const keyboardAtBag = new Keyboard() 
@@ -297,6 +299,93 @@ bot.filter(hears("Itemcheck_atBag_button"),async (ctx) => {
   });
 });
 
+// ++++++++++++++++ use 🩸 ++++++++++++++++++++++++
+/*
+使用回血药剂的状态变化：
+1. players数据表中对应的health_potion_count数字减一
+2. players数据表中对应的cur_hp数字加30(暂定/补完)
+3. 对应的文本进行更新update
+*/
+bot.callbackQuery("Use_Health_Potion", async (ctx) => {
+  const inlineKeyboard = new InlineKeyboard()
+    .text("use 🩸", "Use_Health_Potion")
+    .text("use 💧", "Use_Action_Potion");
+  
+  const user_id = (ctx.msg.chat.id).toString();
+  let player = await getData("SELECT * FROM players WHERE tg_id = ?", user_id);
+  let player_health_count = player.health_potion_count;
+  let player_cur_hp = player.cur_hp;
+  let player_max_hp = player.max_hp;
+
+  if (player_health_count === 0) {
+    await ctx.editMessageText(ctx.t("Use_Health_Potion_Warn", {
+      health_potion_count: player.health_potion_count,
+      action_potion_count: player.action_potion_count,
+    }), {
+      reply_markup: inlineKeyboard,
+    });
+  } else {
+    // 使用回血药剂后的血量
+    player_cur_hp = use_health_potion(player_cur_hp, player_max_hp);
+    player_health_count = player_health_count - 1;
+    await getData("UPDATE players SET health_potion_count = ? WHERE tg_id = ?", [player_health_count, user_id]);
+    await getData("UPDATE players SET cur_hp = ? WHERE tg_id = ?", [player_cur_hp, user_id]);
+    // 界面弹出提示
+    await ctx.answerCallbackQuery({text: ctx.t("Use_Health_Potion_Answer")});
+    await ctx.editMessageText(ctx.t("User_Health_Potion_text", {
+      cur_hp: player_cur_hp,
+      health_potion_count: player_health_count,
+      action_potion_count: player.action_potion_count,
+    }), {
+      reply_markup: inlineKeyboard,
+    });
+  }
+});
+
+// ++++++++++++++++ use 💧 ++++++++++++++++++++++++
+/*
+使用体力药剂的状态变化：
+1. players数据表中对应的action_potion_count数字减一
+2. players数据表中对应的cur_action_points数字加30(暂定/补完)
+3. 对应的文本进行更新update
+*/
+bot.callbackQuery("Use_Action_Potion", async (ctx) => {
+  const inlineKeyboard = new InlineKeyboard()
+    .text("use 🩸", "Use_Health_Potion")
+    .text("use 💧", "Use_Action_Potion");
+  
+  const user_id = (ctx.msg.chat.id).toString();
+  let player = await getData("SELECT * FROM players WHERE tg_id = ?", user_id);
+  let player_action_count = player.action_potion_count;
+  let player_cur_action = player.cur_action_points;
+  let player_max_action = player.max_action_points;
+
+  if (player_action_count === 0) {
+    await ctx.editMessageText(ctx.t("Use_Action_Potion_Warn", {
+      health_potion_count: player.health_potion_count,
+      action_potion_count: player.action_potion_count,
+    }), {
+      reply_markup: inlineKeyboard,
+    });
+  } else {
+    // 使用体力药剂后的体力
+    player_cur_action = use_action_potion(player_cur_action, player_max_action);
+    player_action_count = player_action_count - 1;
+    await getData("UPDATE players SET action_potion_count = ? WHERE tg_id = ?", [player_action_count, user_id]);
+    await getData("UPDATE players SET cur_action_points = ? WHERE tg_id = ?", [player_cur_action, user_id]);
+    // 界面弹出提示
+    await ctx.answerCallbackQuery({text: ctx.t("Use_Action_Potion_Answer")});
+    await ctx.editMessageText(ctx.t("User_Action_Potion_text", {
+      cur_action_points: player_cur_action,
+      health_potion_count: player.health_potion_count,
+      action_potion_count: player_action_count,
+    }), {
+      reply_markup: inlineKeyboard,
+    });
+  }
+});
+
+
 // ++++++++++++++++ Check Weapon ++++++++++++++++++++++++
 // (补完)
 bot.filter(hears("Weaponcheck_atBag_button"),async (ctx) => {
@@ -311,7 +400,12 @@ bot.filter(hears("Armorcheck_atBag_button"),async (ctx) => {
 
 
 
-// -------------- /Rank ----------------------------------------
+// -------------- Shop ----------------------------------------
+// --------------------------------------------------------------
+
+
+
+// -------------- Rank ----------------------------------------
 // --------------------------------------------------------------
 bot.filter(hears("Rank_atStart_button"),async (ctx) => {
   const user_id = (ctx.msg.chat.id).toString();
@@ -332,7 +426,7 @@ bot.filter(hears("Rank_atStart_button"),async (ctx) => {
 
 
 
-// -------------- battle ----------------------------------------
+// -------------- Battle ----------------------------------------
 // --------------------------------------------------------------
 /*
 记得在数据库中将player的status从0变为1
@@ -474,13 +568,13 @@ bot.filter(hears("SendDice_atEvent1_button"),async (ctx) => {
   const dices = await ctx.api.sendDice(user_id);
   const dice_value = dices.dice.value;
   if (dice_value === 6) {
-    await getData("UPDATE players SET gold = gold + ? WHERE id = ?", [20, user_id]);
-    await getData("UPDATE players SET cur_action_points = cur_action_points - ? WHERE id = ?", [10, user_id]);
+    await getData("UPDATE players SET gold = gold + ? WHERE tg_id = ?", [20, user_id]);
+    await getData("UPDATE players SET cur_action_points = cur_action_points - ? WHERE tg_id = ?", [10, user_id]);
     await ctx.reply(ctx.t("Result1_atEvent1_text"), {
       reply_markup: keyboardAtStart,
     });
   } else {
-    await getData("UPDATE players SET cur_action_points = cur_action_points - ? WHERE id = ?", [10, user_id]);
+    await getData("UPDATE players SET cur_action_points = cur_action_points - ? WHERE tg_id = ?", [10, user_id]);
     await ctx.reply(ctx.t("Result2_atEvent1_text", {dice_value: dice_value}), {
       reply_markup: keyboardAtStart,
     });
@@ -697,7 +791,27 @@ bot.filter(hears("ContinueFight_atBattleStart_button"),async (ctx) => {
 });
 */
 
+function getData(sqlaction, params) {
+  return new Promise((resolve, reject) => {
+    connection.query(sqlaction, params, (err, results) => {
+      if (err) {
+        console.error("Error executing query: ", err.message);
+        reject(err);
+      } else {
+        if (results.length > 0) {
+          let result_data = results[0];
+          // console.log("Get Database Data: ", result_data);
+          resolve(result_data); // 解析查询结果并将其返回
+        } else {
+          console.log("Not Found This Data");
+          resolve(null); // 返回空值
+        }
+      }
+    });
+  });
+}
 
+/*
 // 通过sql语句返回查询的信息
 // 使用Promise来处理异步操作
 function getData(sqlaction, params) {
@@ -728,6 +842,28 @@ function getData(sqlaction, params) {
     
   });
 }
+*/
+
+// 使用回血药剂后的血量
+function use_health_potion(cur_hp, max_hp) {
+  const hp_after_use = cur_hp + 30;
+  if (hp_after_use > max_hp) {
+    return max_hp;
+  } else {
+    return hp_after_use;
+  }
+}
+
+// 使用体力药剂后的体力
+function use_action_potion(cur_action, max_action) {
+  const action_after_user = cur_action + 50;
+  if (action_after_user > max_action) {
+    return max_action;
+  } else {
+    return action_after_user;
+  }
+}
+
 
 // 生成一个随机数，如果小于等于0.15则为事件，否则为怪物
 function eventProb() {

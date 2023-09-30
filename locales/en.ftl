@@ -3,9 +3,9 @@ welcome = Welcome to Hunter Dungeon！
 
 welcom_if_not_created = Welcome to Hunter Dungeon！ This is a RPG-like game based on text, you can challenge more monsters to obtain equipments, golds, and ranking points.
 
-                    You haven't created a game character, please click '🥷 Hero' button to create and enjoy your game!
+                        You haven't created a game character, please click '🥷 Hero' button to create and enjoy your game!
 
-                    If you have any question, please click '❓ Help' button to get some useful information.
+                        If you have any question, please click '❓ Help' button to get some useful information.
 
 welcome_if_created = Welcome { $username } back to Hunter Dungeon！This is a RPG-like game based on text, you can challenge more monsters to obtain equipments, golds, and ranking points.
 
@@ -58,6 +58,8 @@ Reward_atHelp_text = We airdrop our Token $HDT to TOP 100 players on Rank
 
 Info_atHero_text = { $username }, below are the information of your hero:
                    Attributes:
+                   💰 Gold: { $gold }
+                   🏃 Action Points: { $action_points }
                    ❤️ Health : { $health }
                    ⚔️ Attack : { $atk }
                    🛡️ Defense : { $def }
@@ -79,28 +81,81 @@ Info_atHero_text = { $username }, below are the information of your hero:
 
                     Armor equipped:
 
-Warn_atHero_text = You don't have a hero. Click '📣 Create Hero' to create one!
+Warn_atHero_text = ❗️ You don't have a hero. Click '📣 Create Hero' to create one!
 Create_atHero_button = 📣 Create Hero
 Info_atHeroCreate_text = Choose you hero's profession
-Finish_atHeroCreate_text = Congragulation! You've created a new hero.
+Finish_atHeroCreate_text = 🎉 Congragulation! You've created a new hero.
                            Try to challenge some monsters and enjoy your adventure!
-Knight_atHeroCreate_button = 🐎 Knight
-Elf_atHeroCreate_button = 🧚‍♀️ Elf
-Wizard_atHeroCreate_button = 🧙‍♂️ Wizard
-Alchemist_atHeroCreate_button = 🧪 Alchemist
 
-Warn_atBag_text = You don't have a hero. Click '🥷 Hero' to create one!
+Warn_atBag_text = ❗️ You don't have a hero. Click '🥷 Hero' to create one!
 Itemcheck_atBag_button = 🔍 Check Items
 Weaponcheck_atBag_button = ⚒️ Check Weapon
 Armorcheck_atBag_button = 🪖 Check Armor
 Info_atBag_text = Here you can check or use the 🔍items, ⚒️weapons, and 🪖armor in your bag.
-Item_atBag_text = Here are the informatio about your items:
+Item_atBag_text = Here are the information about your items:
 
                   🩸 Health Potion Counts : { $health_potion_count }
 
                   💧 Action Potion Counts : { $action_potion_count }
 
-Warn_atRank_text = You don't have a hero. Click '🥷 Hero' to create one!
+                  - Click the 'use 🩸' button below to use a bottle of health potion to restore 30 points of your current HP.
+
+                  - Click the 'use 💧' button below to use a bottle of action potion to restore 50 points of your current Action Points.
+
+Use_Health_Potion_Warn = ❗️ Sorry, you have no 🩸 Health potion. You can go to '🛒 Shop' to buy some.
+                         
+                         Here are the information about your items:
+
+                        🩸 Health Potion Counts : { $health_potion_count }
+
+                        💧 Action Potion Counts : { $action_potion_count }
+
+                        - Click the 'use 🩸' button below to use a bottle of health potion to restore 30 points of your current HP.
+
+                        - Click the 'use 💧' button below to use a bottle of action potion to restore 50 points of your current Action Points.
+Use_Health_Potion_Answer = You've used an 🩸 Health Potion!
+User_Health_Potion_text = You've used an 🩸 Health Potion. 
+                          
+                          Now your current HP is { $cur_hp }.
+                         
+                          Here are the information about your items:
+
+                         🩸 Health Potion Counts : { $health_potion_count }
+
+                         💧 Action Potion Counts : { $action_potion_count }
+
+                         - Click the 'use 🩸' button below to use a bottle of health potion to restore 30 points of your current HP.
+
+                         - Click the 'use 💧' button below to use a bottle of action potion to restore 50 points of your current Action Points.
+
+Use_Action_Potion_Warn = ❗️ Sorry, you have no 💧 Action potion. You can go to '🛒 Shop' to buy some.
+                         
+                         Here are the information about your items:
+
+                        🩸 Health Potion Counts : { $health_potion_count }
+
+                        💧 Action Potion Counts : { $action_potion_count }
+
+                        - Click the 'use 🩸' button below to use a bottle of health potion to restore 30 points of your current HP.
+
+                        - Click the 'use 💧' button below to use a bottle of action potion to restore 50 points of your current Action Points.
+Use_Action_Potion_Answer = You've used an 💧 Action Potion!
+User_Action_Potion_text = You've used an 💧 Action Potion. 
+                          
+                          Now your current Action Points are { $cur_action_points }.
+                         
+                          Here are the information about your items:
+
+                         🩸 Health Potion Counts : { $health_potion_count }
+
+                         💧 Action Potion Counts : { $action_potion_count }
+
+                         - Click the 'use 🩸' button below to use a bottle of health potion to restore 30 points of your current HP.
+
+                         - Click the 'use 💧' button below to use a bottle of action potion to restore 50 points of your current Action Points.
+
+
+Warn_atRank_text = ❗️ You don't have a hero. Click '🥷 Hero' to create one!
 Info_NoRank_atRank_text = Here are the informatio about your ranking:
                           
                           🥇 Ranking Points : { $ranking_points }
@@ -113,8 +168,8 @@ Info_atRank_text = Here are the informatio about your ranking:
 
                    🏆 Ranking : { $ranking }
 
-Warn_Create_atBattle_text = You don't have a hero. Click '🥷 Hero' to create one!
-Warn_Action_atBattle_text = You don't have enough action points to battle. 
+Warn_Create_atBattle_text = ❗️ You don't have a hero. Click '🥷 Hero' to create one!
+Warn_Action_atBattle_text = ❗️ You don't have enough action points to battle. 
                             
                             Please use 💧 Action Potion in bag or wait for the recovey of action points.
 Continue_atEventStart_button = 🎲 Continue Event
