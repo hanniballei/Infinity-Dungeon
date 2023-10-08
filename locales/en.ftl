@@ -55,6 +55,7 @@ Suggestion_atHelp_text = 🌍 Language  -  You can switch between Chinese and En
 
 Reward_atHelp_button = 💰 Reward
 Reward_atHelp_text = We airdrop our Token $HDT to TOP 100 players on Rank
+Whitepaper_atHelp_text = You can check Game Mechanics / Tokenomics / Roadmap / Community / Team ...
 
 Info_atHero_text = { $username }, below are the information of your hero:
                    Attributes:

@@ -118,6 +118,8 @@ bot.filter(hears("Help_atStart_button"), async (ctx) => {
                               .text(ctx.t("Suggestion_atHelp_button"))
                               .row()
                               .text(ctx.t("Reward_atHelp_button"))
+                              .text(ctx.t("Whitepaper_atHelp_button"))
+                              .row()
                               .text(ctx.t("Back_Home_button"))
                               .resized();
 
@@ -141,6 +143,12 @@ bot.filter(hears("Suggestion_atHelp_button"), async (ctx) => {
 // (补完)等经济系统设计好就补全奖励机制的具体细节
 bot.filter(hears("Reward_atHelp_button"), async (ctx) => {
   await ctx.reply(ctx.t("Reward_atHelp_text"));
+});
+
+// ++++++++++++++++ Whitepaper ++++++++++++++++++++++++
+// (补完) 随时补充更新内容
+bot.filter(hears("Whitepaper_atHelp_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Whitepaper_atHelp_text"));
 });
 
 

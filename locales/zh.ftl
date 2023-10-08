@@ -12,8 +12,6 @@ welcome_if_created = 欢迎猎手 { $username } 重返地下城！这是几个�
 
                      如果您有任何疑问，请点击 "❓ 帮助" 按钮获取有用的提示。
 
-Kill = 杀！
-
 Back_Home_button = ⬅️🏠 回到主页
 
 Back_atHelp_button = ⬅️ 返回
@@ -56,6 +54,7 @@ Suggestion_atHelp_text = 🌍 语言  -  您可以在中文和英文之间切换
 
 Reward_atHelp_button = 💰 奖励机制
 Reward_atHelp_text = 我们将会给排行榜上排名 前100 的玩家发放代币 $HDT
+Whitepaper_atHelp_text = 您可以了解: 游戏机制 / 代币经济 / 路线图 / 社区 / 团队 ...
 
 Info_atHero_text = { $username }, 下面是你的英雄的基本信息:
                    属性:
