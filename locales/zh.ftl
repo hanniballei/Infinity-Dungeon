@@ -58,6 +58,8 @@ Whitepaper_atHelp_text = 您可以了解: 游戏机制 / 代币经济 / 路线�
 
 Info_atHero_text = { $username }, 下面是你的英雄的基本信息:
                    属性:
+                   💰 游戏代币: { $gold }
+                   🏃 体力值: { $action_points }
                    ❤️ 生命值 : { $health }
                    ⚔️ 攻击力 : { $atk }
                    🛡️ 防御力 : { $def }
@@ -79,17 +81,18 @@ Info_atHero_text = { $username }, 下面是你的英雄的基本信息:
 
                     穿着的防具:
 
-Warn_atHero_text = 你还没有英雄! 立即创建一个吧!
+Warn_atHero_text = ❗️ 你还没有英雄! 立即创建一个吧!
 Create_atHero_button = 📣 创建英雄
-Finish_atHeroCreate_text = 恭喜您创建了一个新的英雄！
+Finish_atHeroCreate_text = 🎉 恭喜您创建了一个新的英雄！
                            下面您可以挑战地下城的怪物并享受这段冒险！
 Knight_atHeroCreate_button = 🐎 骑士
 Elf_atHeroCreate_button = 🧚‍♀️ 精灵
 Wizard_atHeroCreate_button = 🧙‍♂️ 法师
 Alchemist_atHeroCreate_button = 🧪 术士
 
-Warn_atBag_text = 您还没有创建英雄，请点击 '🥷 Hero' 按钮进行创建！
+Warn_atBag_text = ❗️ 您还没有创建英雄，请点击 '🥷 Hero' 按钮进行创建！
 Itemcheck_atBag_button = 🔍 查看道具
+Use_Health_Potion_Answer = 您成功使用一瓶回血药剂！
 Weaponcheck_atBag_button = ⚒️ 查看武器
 Armorcheck_atBag_button = 🪖 查看防具
 Info_atBag_text = 这里你可以查看或使用背包中的🔍道具、⚒️武器和🪖防具。
@@ -99,7 +102,63 @@ Item_atBag_text = 下面是你背包中物品的信息：
 
                   💧 体力药剂数量 : { $action_potion_count }
 
-Warn_atRank_text = 您还没有创建英雄，请点击 '🥷 Hero' 按钮进行创建！
+                  - 点击下方 ‘use 🩸’ 按钮使用一瓶回血药剂回复30点当前生命值
+
+                  - 点击下方 ‘use 💧’ 按钮使用一瓶体力药剂回复50点当前体力值
+
+Use_Health_Potion_Warn = ❗️ 抱歉，您目前还没有 🩸 回血药剂。您可以前往 ‘🛒 商店’ 进行购买。
+                         
+                         下面是你背包中物品的信息：
+
+                         🩸 回血药剂数量 : { $health_potion_count }
+
+                         💧 体力药剂数量 : { $action_potion_count }
+
+                         - 点击下方 ‘use 🩸’ 按钮使用一瓶回血药剂回复30点当前生命值
+
+                         - 点击下方 ‘use 💧’ 按钮使用一瓶体力药剂回复50点当前体力值
+Use_Health_Potion_Answer = 您已经使用了一瓶 🩸 回血药剂！
+User_Health_Potion_text = 您已经使用了一瓶 🩸 回血药剂。
+                          
+                          现在您的生命值为 { $cur_hp }。
+                         
+                          下面是你背包中物品的信息：
+
+                          🩸 回血药剂数量 : { $health_potion_count }
+
+                          💧 体力药剂数量 : { $action_potion_count }
+
+                          - 点击下方 ‘use 🩸’ 按钮使用一瓶回血药剂回复30点当前生命值
+
+                          - 点击下方 ‘use 💧’ 按钮使用一瓶体力药剂回复50点当前体力值
+
+Use_Action_Potion_Warn =  ❗️ 抱歉，您目前还没有 💧 体力药剂。您可以前往 ‘🛒 商店’ 进行购买。
+                         
+                          下面是你背包中物品的信息：
+
+                          🩸 回血药剂数量 : { $health_potion_count }
+
+                          💧 体力药剂数量 : { $action_potion_count }
+
+                          - 点击下方 ‘use 🩸’ 按钮使用一瓶回血药剂回复30点当前生命值
+
+                          - 点击下方 ‘use 💧’ 按钮使用一瓶体力药剂回复50点当前体力值
+Use_Action_Potion_Answer = 您已经使用了一瓶 💧 体力药剂！
+User_Action_Potion_text = 您已经使用了一瓶 💧 体力药剂。
+                          
+                          现在您的体力值为 { $cur_action_points }。
+                         
+                          下面是你背包中物品的信息：
+
+                          🩸 回血药剂数量 : { $health_potion_count }
+
+                          💧 体力药剂数量 : { $action_potion_count }
+
+                          - 点击下方 ‘use 🩸’ 按钮使用一瓶回血药剂回复30点当前生命值
+
+                          - 点击下方 ‘use 💧’ 按钮使用一瓶体力药剂回复50点当前体力值
+
+Warn_atRank_text = ❗️ 您还没有创建英雄，请点击 '🥷 Hero' 按钮进行创建！
 Info_NoRank_atRank_text = 下面是你的排名分及排名信息:
                           
                           🥇 排名积分 : { $ranking_points }
@@ -112,10 +171,10 @@ Info_atRank_text = 下面是你的排名分及排名信息:
 
                     🏆 排名 : { $ranking }
 
-Warn_Create_atBattle_text = 您还没有创建英雄，请点击 '🥷 Hero' 按钮进行创建！
-Warn_Action_atBattle_text = 您没有足够的体力进行战斗。
+Warn_Create_atBattle_text = ❗️ 您还没有创建英雄，请点击 '🥷 Hero' 按钮进行创建！
+Warn_Action_atBattle_text = ❗️ 您没有足够的体力进行战斗。
                             
-                            请使用背包中的💧 体力药剂或者等待体力自然恢复。
+                            请使用背包中的 💧 体力药剂（目前剩余量为XXX）或者等待体力自然恢复。
 Continue_atEventStart_button = 🎲 继续事件
 Intro_atEventStart_text = 🎲 您遇到了一个随机事件，运气够好可以获得奖励。 
 

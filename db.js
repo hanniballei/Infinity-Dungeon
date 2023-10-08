@@ -2,6 +2,7 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const mysql = require('mysql');
 require('dotenv').config();
+/*
 const dbpool = mysql.createPool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -9,9 +10,18 @@ const dbpool = mysql.createPool({
     password: process.env.DB_PW,
     database: process.env.DB_DATABASE
 });
+*/
+
+const connection = mysql.createConnection({
+  host     : process.env.DB_HOST,
+  port     : process.env.DB_PORT,
+  user     : process.env.DB_USER,
+  password : process.env.DB_PW,
+  database : process.env.DB_DATABASE
+}); 
 
 // 导出数据库连接
-export { dbpool };
+// export { dbpool };
 
 export const users = `
   CREATE TABLE IF NOT EXISTS users (
@@ -85,6 +95,43 @@ export const monsters = `
 `;
 
 // 连接数据库
+connection.connect(function(err) {
+  if (err) {
+    return console.error('error: ' + err.message);
+  }
+
+  console.log('DB has connected to the MySQL server.');
+}
+);
+
+connection.query(users, (error) => {
+  if (error) {
+    console.error('Error creating table users:', error);
+  } else {
+    console.log('Table users created successfully.');
+  }
+});
+
+connection.query(players, (error) => {
+  if (error) {
+    console.error('Error creating table players:', error);
+  } else {
+    console.log('Table players created successfully.');
+  }
+});
+
+connection.query(monsters, (error) => {
+  if (error) {
+    console.error('Error creating table monsters:', error);
+  } else {
+    console.log('Table monsters created successfully.');
+  }
+});
+
+export {connection};
+
+/*
+// 连接数据库
 dbpool.getConnection((err, connection) => {
   if (err) {
     console.log('connection failed');
@@ -112,3 +159,4 @@ dbpool.getConnection((err, connection) => {
     connection.destroy();
   }
 })
+*/
