@@ -1,12 +1,12 @@
 welcome = 欢迎猎手来到地下城！
           请点击 💼 钱包 按钮以连接钱包
-welcom_if_not_created = 欢迎猎手来到地下城！这是几个文字类RPG游戏，您可以挑战各种各样的怪物来获取装备、游戏代币以及排名点数。
+welcom_if_not_created = 欢迎猎手来到地下城！这是一个文字类 Roguelike 游戏，您可以挑战各种各样的怪物来获取装备、游戏代币以及排名点数。
 
                     目前您还没有创建游戏角色，请点击 "🥷 Hero" 按钮进行创建。
 
                     如果您有任何疑问，请点击 "❓ 帮助" 按钮获取有用的提示。
 
-welcome_if_created = 欢迎猎手 { $username } 重返地下城！这是几个文字类RPG游戏，你可以挑战各种各样的怪物来获取装备、游戏代币以及排名点数。
+welcome_if_created = 欢迎猎手 { $username } 重返地下城！这是一个文字类 Roguelike 游戏，你可以挑战各种各样的怪物来获取装备、游戏代币以及排名点数。
 
                      您可以点击 "👹 战斗" 开始您的冒险之旅！
 
@@ -54,6 +54,51 @@ Suggestion_atHelp_text = 🌍 语言  -  您可以在中文和英文之间切换
 
 Reward_atHelp_button = 💰 奖励机制
 Reward_atHelp_text = 我们将会给排行榜上排名 前100 的玩家发放代币 $HDT
+Whitepaper_atHelp_button = 📖 游戏手册
+Adventure_atHelpWhitepaper_button = 📖 冒险
+Adventure_atHelpWhitepaper_text = - 冒险无门槛，关卡无止境！ 
+                                  - 在地下城中对战随机的怪物，收集 $INFD💰 和强大装备的图纸，探索更深处的地下城
+                                  - ⚠️ 只有金币和装备图纸可以从地下城中带走，其他属性加成/道具等，都仅在当前冒险中有效；
+                                  - 你需要向拾荒者支付此次冒险中获得的 $INFD💰 的50%，拾荒者才愿意将你带出地下城 (不论你是是死是活);
+                                  - 在冒险过程中，你会遇到随机事件: 
+                                    1. 遗迹 
+                                    有概率获得大量 $INFD💰、提升/降低血量上限、提升/降低攻击力上限、提升/降低防御力上限、提升暴击/强力防御的点数出现的概率
+                                    2. 黑市 
+                                    可以购买道具/装备，或是强化当前装备
+                                    3. 宝箱
+                                    有可能获得大量 $INFD💰、一些道具、装备图纸等，也有可能空空如也
+                                    4. 战斗
+                                    杀出一条血路！战斗过程是通过摇骰子的随机性来决定的。根据你和怪物的速度属性，决定谁先手发起攻击。攻击与防守都需要摇骰子点数，来判断造成的伤害范围，或有效防御的伤害范围。若运气好，你可以将怪物一击必杀。若运气不好，你难伤其分毫！祝你好运吧，冒险家！
+Shop_atHelpWhitepaper_button = 📖 商店
+Shop_atHelpWhitepaper_text = 在进入地下城之前，可先在商店购买道具（$INFD 计价），以做好充足的准备。注意，购买的道具只会在下一次冒险中生效，而无法从地下城中带回！
+Powerup_atHelpWhitepaper_button = 📖 强化
+Powerup_atHelpWhitepaper_text = 花费 $INFD💰 来强化角色的基础属性、攻击和防御行为的概率分布等等各个有利于勇闯地下城的因素
+Wishwell_atHelpWhitepaper_button = 📖 许愿井
+Wishingwell_atHelpWhitepaper_button = 可以通过在许愿井质押 $INFD💰 来许愿。许愿的效果是，可以增加之后冒险时获取到的金币数量。质押数量越多，时间越久，许愿的力量越强。
+Ranking_atHelpWhitepaper_button = 📖 排名
+Ranking_atHelpWhitepaper_text = 冒险家协会决定给排行榜上排名前 X 的冒险家颁发总计 Y $INFD💰 的奖励，以激励冒险家们踏平地下城。具体的奖励细节，将由冒险家协会提案治理决定
+Casino_atHelpWhitepaper_button = 📖 赌场
+Casino_atHelpWhitepaper_text = 冒险家协会建立了赌场，供精神疲劳的冒险家们消遣娱乐。赌场里将会有越来越多新鲜刺激的金钱游戏，获得与勇闯地下城不同的快感！
+Temple_atHelpWhitepaper_button = 📖 寺庙
+Temple_atHelpWhitepaper_text = 冒险家协会遵循世界各地冒险家们的信仰，在地下城门口修建不同宗教信仰的寺庙，供冒险家们祈祷。冒险家可以进入寺庙来祈福，祈福的力量将会提升下一次冒险的信心和实力。当然，如果能够给住持们带来些更实在的帮助，祈福的效果会更强。
+Token_atHelpWhitepaper_button = 📖 $INFD💰
+Token_atHelpWhitepaper_text = $INFD💰 是地下城世界的通用代币，以智能合约的形式部署在 The Open Network (TON)。地下城世界藏着无数的金币，冒险家们可以通过战胜怪物/打开宝箱/探索遗迹等方式获取金币。金币将被用于地下城世界中的许多消耗场景。冒险家也可以选择将自己积累的 $INFD 金币提取到链上钱包，以获取实际收益，或从链上钱包充值到游戏中，以帮助其做好探索地下城的充足准备。
+NFT_atHelpWhitepaper_button = 📖 NFT 资产
+NFT_atHelpWhitepaper_text = 在地下城中，散落着具有不同属性加成和稀有度的装备图纸。你拾取到图纸后，即解锁了该装备，可以在之后的冒险中获得该装备（例如通过宝箱、黑市），以增强探索地下城的实力。你可以选择将装备图纸以 NFT 的形式铸造在 The Open Networ(TON)上，这样就可以在更大的区块链上交易市场中进行交易。如果你在地下城中运气不好，或者喜欢收藏，你也可以在链上交易市场中购买别人的装备图纸，这同样也能在游戏中体验到该装备
+Roadmap_atHelpWhitepaper_button = 📖 路线图
+Roadmap_atHelpWhitepaper_text = 2023 Q3: 头脑风暴 & Demo 开发 ☑️
+                                2023 Q4: 开发更多链上资产和开放世界场景 (例如许愿井、赌场、寺庙等)
+                                2024 Q1: 发布 V1.0 版本和早鸟体验计划
+                                2024 Q2: 50,000+ 月活
+Community_atHelpWhitepaper_button = 📖 社区
+Community_atHelpWhitepaper_text = 社区频道: 即将公布
+Team_atHelpWhitepaper_button = 📖 团队
+Team_atHelpWhitepaper_text = Jason, 联合创始人, 5年 AI / Web3 技术背景
+                             XYZ, 联合创始人, 核心开发者 & 游戏策划, 沉迷 Web3 & 游戏 
+                             Chloe, 市场运营, 前 Bitget 用户增长产品经理
+                             Tian, 游戏策划, 前 Funplus 游戏策划师
+
+
 Whitepaper_atHelp_text = 您可以了解: 游戏机制 / 代币经济 / 路线图 / 社区 / 团队 ...
 
 Info_atHero_text = { $username }, 下面是你的英雄的基本信息:

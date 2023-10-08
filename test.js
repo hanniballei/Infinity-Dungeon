@@ -149,7 +149,119 @@ bot.filter(hears("Reward_atHelp_button"), async (ctx) => {
 // ++++++++++++++++ Whitepaper ++++++++++++++++++++++++
 // (补完) 随时补充更新内容
 bot.filter(hears("Whitepaper_atHelp_button"), async (ctx) => {
-  await ctx.reply(ctx.t("Whitepaper_atHelp_text"));
+  const keyboardAtHelpWhitepaper = new Keyboard() 
+                              .text(ctx.t("Adventure_atHelpWhitepaper_button"))
+                              .text(ctx.t("Shop_atHelpWhitepaper_button"))
+                              .row()
+                              .text(ctx.t("Powerup_atHelpWhitepaper_button"))
+                              .text(ctx.t("Wishingwell_atHelpWhitepaper_button"))
+                              .row()
+                              .text(ctx.t("Ranking_atHelpWhitepaper_button"))
+                              .text(ctx.t("Casino_atHelpWhitepaper_button"))
+                              .row()
+                              .text(ctx.t("Temple_atHelpWhitepaper_button"))
+                              .text(ctx.t("Token_atHelpWhitepaper_button"))
+                              .row()
+                              .text(ctx.t("NFT_atHelpWhitepaper_button"))
+                              .text(ctx.t("Roadmap_atHelpWhitepaper_button"))
+                              .row()
+                              .text(ctx.t("Community_atHelpWhitepaper_button"))
+                              .text(ctx.t("Team_atHelpWhitepaper_button"))
+                              .row()
+                              .text(ctx.t("Back_atHelp_button"))
+                              .resized();
+  await ctx.reply(ctx.t("Whitepaper_atHelp_text"), {
+    reply_markup: keyboardAtHelpWhitepaper
+  });
+});
+
+// ++++++++++++++++ Back ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Back_atHelp_button"), async (ctx) => {
+  const keyboardAtHelp = new Keyboard() 
+                              .text(ctx.t("Story_atHelp_button"))
+                              .text(ctx.t("Suggestion_atHelp_button"))
+                              .row()
+                              .text(ctx.t("Reward_atHelp_button"))
+                              .text(ctx.t("Whitepaper_atHelp_button"))
+                              .row()
+                              .text(ctx.t("Back_Home_button"))
+                              .resized();
+  await ctx.reply(ctx.t("Info_atHelp_text"), {
+    reply_markup: keyboardAtHelp
+  });
+});
+
+// ++++++++++++++++ Whitepaper: Adventure ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Adventure_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Adventure_atHelpWhitepaper_text"));
+});
+
+// ++++++++++++++++ Whitepaper: Shop ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Shop_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Shop_atHelpWhitepaper_text"));
+});
+
+// ++++++++++++++++ Whitepaper: Powerup ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Powerup_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Powerup_atHelpWhitepaper_text"));
+});
+
+// ++++++++++++++++ Whitepaper: Wishingwell ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Wishingwell_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Wishingwell_atHelpWhitepaper_text"));
+});
+
+// ++++++++++++++++ Whitepaper: Ranking ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Ranking_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Ranking_atHelpWhitepaper_text"));
+});
+
+// ++++++++++++++++ Whitepaper: Casino ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Casino_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Casino_atHelpWhitepaper_text"));
+});
+
+// ++++++++++++++++ Whitepaper: Temple ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Temple_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Temple_atHelpWhitepaper_text"));
+});
+
+// ++++++++++++++++ Whitepaper: Token ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Token_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Token_atHelpWhitepaper_text"));
+});
+
+// ++++++++++++++++ Whitepaper: NFT ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("NFT_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("NFT_atHelpWhitepaper_text"));
+});
+
+// ++++++++++++++++ Whitepaper: Roadmap ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Roadmap_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Roadmap_atHelpWhitepaper_text"));
+});
+
+// ++++++++++++++++ Whitepaper: Community ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Community_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Community_atHelpWhitepaper_text"));
+});
+
+// ++++++++++++++++ Whitepaper: Team ++++++++++++++++++++++++
+// (补完)等经济系统设计好就补全奖励机制的具体细节
+bot.filter(hears("Team_atHelpWhitepaper_button"), async (ctx) => {
+  await ctx.reply(ctx.t("Team_atHelpWhitepaper_text"));
 });
 
 

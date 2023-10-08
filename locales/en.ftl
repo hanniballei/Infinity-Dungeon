@@ -1,20 +1,19 @@
 welcome = Welcome to Hunter Dungeon！
           Please connect wallet by clicking 💼 Wallet button
 
-welcom_if_not_created = Welcome to Hunter Dungeon！ This is a RPG-like game based on text, you can challenge more monsters to obtain equipments, golds, and ranking points.
+welcom_if_not_created = Welcome to Hunter Dungeon！ This is a Roguelike game based on text, you can challenge more monsters to obtain equipments, golds, and ranking points.
 
                         You haven't created a game character, please click '🥷 Hero' button to create and enjoy your game!
 
                         If you have any question, please click '❓ Help' button to get some useful information.
 
-welcome_if_created = Welcome { $username } back to Hunter Dungeon！This is a RPG-like game based on text, you can challenge more monsters to obtain equipments, golds, and ranking points.
+welcome_if_created = Welcome { $username } back to Hunter Dungeon！This is a Roguelike game based on text, you can challenge more monsters to obtain equipments, golds, and ranking points.
 
                          You can click '👹 Battle' button to enjoy your adventure!
 
                          If you have any question, please click '❓ Help' button to get some useful information.
 
 Back_Home_button = ⬅️🏠 Back to Homepage
-
 Back_atHelp_button = ⬅️ Back
 Back_atLang_button = ⬅️ Back
 Info_atLangSub_text = Language switched
@@ -37,7 +36,6 @@ Story_atHelp_button = 📗 Story
 Story_atHelp_text = In a realm plagued by darkness, the once-prosperous kingdom lies in ruins. The land is teeming with treacherous dungeons filled with formidable monsters. 
 
                     As a valiant Dungeon Hunter, your quest is to restore glory to the kingdom. Venturing into the abyss, you'll combat menacing creatures, gather legendary gear, and strive for the top rank, all to bring hope back to a land shrouded in shadows.
-
 Suggestion_atHelp_button = 📘 Button Info
 Suggestion_atHelp_text = 🌍 Language  -  You can switch between Chinese and English.
                          
@@ -52,10 +50,54 @@ Suggestion_atHelp_text = 🌍 Language  -  You can switch between Chinese and En
                          🗒️ Rank  -  Check your ranking points and position.
 
                          💼 Wallet  -  Connect your TON wallet.
-
 Reward_atHelp_button = 💰 Reward
 Reward_atHelp_text = We airdrop our Token $HDT to TOP 100 players on Rank
-Whitepaper_atHelp_text = You can check Game Mechanics / Tokenomics / Roadmap / Community / Team ...
+Whitepaper_atHelp_button = 📖 Wiki
+Whitepaper_atHelp_text = You can view Game Mechanics / Tokenomics / Roadmap / Community / Team ...
+Adventure_atHelpWhitepaper_button = 📖 Adventure 
+Adventure_atHelpWhitepaper_text = - Free-to-Play, Endless Levels 
+                                  - Fight random monsters, collect $INFD💰 and powerful equipments NFT, and continue to explore deeper Dungeon
+                                  - ⚠️ Only $INFD tokens and equipment NFT can be taken away from the dungeon, other bonuses/props are only valid in the on-going adventure;
+                                  - You need to pay 50% of the $INFD💰 collected during the current adventure to the Scavenger as a tip for taking you out of Dungeon (No matter you are dead or alive);
+                                  - During the adventure, there will be random events:
+                                    1. Ruins
+                                    You have a chance to obtain a large amount of $INFD💰, increase/decrease the upper limit of blood volume, increase/decrease the upper limit of attack power, increase/decrease the upper limit of defense power, increase the probability of critical hit/defense, etc
+                                    2. Black Market
+                                    You can purchase props/equipments at black market, or enhance current equipments
+                                    3. Treasure chest
+                                    You may obtain a large amount of $INFD💰, some props, equipment NFT, etc., or it may be empty
+                                    4. Combat 
+                                    Fight your way out! The mechanics of fighting are determined by the randomness of rolling dice. The speed for both sides determines who attacks first. Both attack and defense actions require rolling dice to determine the damage range caused, or the damage range of effective defense. If you're lucky, you can kill the monster in one hit. If you're unlucky, your attacks hurt like tickling! Good luck, adventurer!
+Shop_atHelpWhitepaper_button = 📖 Shop
+Shop_atHelpWhitepaper_text = Before entering the dungeon, you can purchase props (priced in $INFD) in the Shop to be fully prepared. Note that the purchased props will only take effect in the next adventure and cannot be brought back from the dungeon!
+Powerup_atHelpWhitepaper_button = 📖 Powerup
+Powerup_atHelpWhitepaper_text = Spend $INFD💰 to strengthen the character’s attributes, probability distribution of attack and defense behaviors, and other factors that are conducive to exploring the Dungeon.
+Wishwell_atHelpWhitepaper_button = 📖 Wishing Well
+Wishingwell_atHelpWhitepaper_button = You can make wishes by staking $INFD💰 in the Wishing Well. The effect of making a wish is to increase the number of $INFD💰 obtained during future adventures. The greater the pledge amount and the longer the time, the stronger the power of the wish.
+Ranking_atHelpWhitepaper_button = 📖 Ranking
+Ranking_atHelpWhitepaper_text = The Adventurers Association decided to award a total of Y $INFD💰 to the top X adventurers on the leaderboard to encourage adventurers to conquer the dungeon. Specific reward details will be determined by the Adventurers Association governance.
+Casino_atHelpWhitepaper_button = 📖 Casino
+Casino_atHelpWhitepaper_text = The Adventurers Association built the Casino for the entertainment of mentally tired adventurers. There will be more and more exciting money games in the Casino, giving you a different thrill than venturing into dungeons!
+Temple_atHelpWhitepaper_button = 📖 Temple
+Temple_atHelpWhitepaper_text = The Adventurers Association follows the beliefs of adventurers from all over the world and builds temples of different religious beliefs for adventurers to pray. Adventurers can enter temples to pray for blessings. The power of blessings will enhance their confidence and strength for the next adventure. Of course, if you can bring more practical help to the abbots, the blessing effect will be stronger.
+Token_atHelpWhitepaper_button = 📖 $INFD💰
+Token_atHelpWhitepaper_text = $INFD💰 is the universal token of the Dungeon and is deployed on The Open Network (TON). There are countless $INFD💰 hidden in the Dungeon, and you can obtain it by defeating monsters/opening treasure chests/exploring ruins, etc. It will be used in many consumption scenarios in the Dungeon. You can also choose to withdraw your accumulated $INFD💰 to the on-chain wallet, or recharge from the on-chain wallet into the game to help you be fully prepared to explore the Dungeon.
+NFT_atHelpWhitepaper_button = 📖 NFT Assets
+NFT_atHelpWhitepaper_text = In the Dungeon, there are equipment blueprints with different bonuses and rarities scattered around. After you find the blueprint, you unlock the equipment, which you can obtain in future adventures (for example, through treasure chests or the black market) to enhance your power to explore the Dungeon. You can choose to mint the equipment blueprint in the form of NFT on The Open Network (TON), so that they can be traded in the larger on-chain trading market. If you are unlucky in the Dungeon or like to collect, you can also buy other adventurer's equipment blueprints in the on-chain market, which will also allow you to use the equipment.
+Roadmap_atHelpWhitepaper_button = 📖 Roadmap
+Roadmap_atHelpWhitepaper_text = 2023 Q3: Brain-storm and demo development ☑️
+                                2023 Q4: Develop more on-chain assets and open-world scenarios (like Wishwell, Casinio, Temple and so on)
+                                2024 Q1: Release V1.0 and launch early-bird program.
+                                2024 Q2: 50,000+ MAU
+Community_atHelpWhitepaper_button = 📖 Community
+Community_atHelpWhitepaper_text = Community entrance: TBA
+Team_atHelpWhitepaper_button = 📖 Team
+Team_atHelpWhitepaper_text = Jason, Co-founder, 5 years in AI / Web3 tech
+                             XYZ, Co-founder, Core developer & Game Designer, Web3 & Game fans
+                             Chloe, Market operator, ex-Bitget user growth
+                             Tian, Game Designer, ex-Funplus
+
+
 
 Info_atHero_text = { $username }, below are the information of your hero:
                    Attributes:
@@ -81,7 +123,6 @@ Info_atHero_text = { $username }, below are the information of your hero:
                     Weapon equipped:
 
                     Armor equipped:
-
 Warn_atHero_text = ❗️ You don't have a hero. Click '📣 Create Hero' to create one!
 Create_atHero_button = 📣 Create Hero
 Info_atHeroCreate_text = Choose you hero's profession
